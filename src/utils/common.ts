@@ -1,0 +1,1 @@
+export const e2p = (s: string | number) => !Number.isNaN(Number(s)) ? `${s}`.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[+d]).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[+d]) : s

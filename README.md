@@ -1,2 +1,1 @@
-# hadise-dard
-Hadise Dard Website
+# Hadise Dard Website

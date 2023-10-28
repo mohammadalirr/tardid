@@ -1,0 +1,16 @@
+logs
+*.log
+
+build/
+
+node_modules/
+
+.eslintcache
+
+*.log
+*.lock
+*.DS_Store
+
+.next/
+
+.cache/

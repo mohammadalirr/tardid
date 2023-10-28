@@ -1,0 +1,6 @@
+export * from './Hero'
+export * from './ActivityAreas'
+export * from './Products'
+export * from './SubCompanies'
+export * from './Statistics'
+export * from './MyCarousel'
