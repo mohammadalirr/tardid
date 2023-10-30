@@ -1,7 +1,7 @@
 const env = process.env.URL_ENV ?? 'development'
 
 const mapApiUrl = {
-  development: 'http://localhost:4000/api',
+  development: 'https://core.cialk-grp.com/api',
   staging: 'https://core.cialk-grp.com/api',
   production: 'https://api.example.com/v1',
 }

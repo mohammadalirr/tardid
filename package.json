@@ -4,7 +4,7 @@
   "description": "Hadise Dard Website",
   "private": true,
   "scripts": {
-    "dev": "URL_ENV=development next dev",
+    "dev": "next dev",
     "dev-server": "URL_ENV=staging next dev",
     "start": "URL_ENV=staging next start -p 3000",
     "lint": "next lint",
