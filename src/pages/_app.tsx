@@ -1,5 +1,11 @@
 
-import '../styles/globals.css';
+// import '../styles/globals.css';
+import '../css/reset.css';
+import '../css/main.css';
+import '../css/glass.css';
+import '../css/gallery.css';
+import '../css/ticket-page.css';
+import '../css/pardakht.css';
 import {
   ColorScheme,
   ColorSchemeProvider,
