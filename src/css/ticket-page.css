@@ -1,0 +1,249 @@
+.form-parent {
+  width: 100vw;
+  height: 100%;
+  background-color: rgb(0, 0, 0) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #000;
+  z-index: 1;
+  padding: 0;
+}
+
+.row-t {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4em 0 6em 0;
+}
+
+.form-container {
+  height: auto;
+  background-color: whitesmoke;
+  padding: 3em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 0.1em solid #bb2d3b;
+  border-radius: 30px;
+  z-index: 1;
+  animation: shadowAnimate-p 5s ease infinite alternate;
+}
+
+.second-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  /* display: none; */
+}
+
+
+.ticket-counter {
+  margin: 1em 0;
+  width: 70%;
+  z-index: 1000;
+}
+
+.form-control {
+  background-color: white;
+  color: #000;
+  text-align: center;
+}
+
+.accordion {
+  font-family: Vazirmatn;
+  width: 70%;
+  direction: rtl;
+  margin: 0.4em 0;
+}
+
+.form-btn-parent {
+  width: auto;
+  height: auto;
+  background-color: gray;
+  position: relative;
+  top: 2.5em;
+  margin-top: 2em;
+  width: 70%;
+  box-shadow: 10px 20px 100px 0px #bb2d3b;
+  border-radius: 10px;
+}
+
+.radio-group {
+  font-size: 14px;
+  margin: 2em 0 1em 0;
+  width: 100%;
+}
+
+@keyframes shadowAnimate-t {
+  0% {
+    /* transform: translate(0, 0); */
+    box-shadow: 0 0 150px -20px white;
+  }
+  50% {
+    /* transform: translate(20px, 20px); */
+    box-shadow: 0px 0px 150px -20px rgb(134, 132, 132);
+  }
+  75% {
+    /* transform: translate(20px, 20px); */
+    box-shadow: 0px 0px 150px -20px white;
+  }
+  100% {
+    box-shadow: 0px 0px 150px -20px rgb(134, 132, 132);
+  }
+}
+
+.input-group-text:active {
+  padding-bottom: 0.1px;
+  user-select: none;
+}
+
+@media (max-width: 500px) {
+  .form-container {
+    border-radius: 20px;
+    width: 96%;
+    font-size: 16px;
+  }
+  .ticket-counter {
+    width: 95%;
+  }
+  .accordion-button {
+    font-size: 15px;
+  }
+  .accordion {
+    width: 95%;
+  }
+  .form-btn {
+    width: 75%;
+  }
+  .selector-container {
+    width: 95%;
+  }
+  .btn-outline-light {
+    font-size: 14px;
+  }
+
+}
+
+/* [class^="person-"] {
+  display: none;
+}
+
+.person-footer-0 {
+  display: block !important;
+}
+
+[class^="person-title-leader-"] {
+  display: none;
+}
+
+.person-title-leader-0 {
+  display: block;
+}
+
+[class^="person-title-member-"] {
+  display: block;
+} */
+
+/* .person-title-member-0 {
+  display: none;
+} */
+
+.footer-0 {
+  color: gray;
+  font-size: 14px;
+  margin: 4em .3em 0 0 !important;
+  padding: 0.5em 0 0 0;
+  width: 100%;
+}
+
+.imp {
+  color: #DC3545;
+}
+
+.days {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Yekan;
+  margin-bottom: 3em;
+  background-color:#CFE2FF;
+  color: #000;
+  padding: 0;
+  border-radius: 5px;
+  margin: .7em 0 2em 0;
+  width: 100%;
+}
+
+
+.form-floating {
+  width : 70%
+}
+.form-select {
+  width: 100%;
+}
+
+.btn-outline-light {
+  color: #000;
+  border: none;
+}
+.btn-outline-light:hover {
+  color: #000 !important;
+  box-shadow: 0 0 3px 1px white !important;
+
+}
+
+.point {
+  color: #DC3545;
+  font-size: smaller;
+  margin-right: .3em;
+}
+
+.selector-container {
+  width: 70%;
+  font-family: "Vazirmatn";
+};
+
+
+.day-title {
+  align-self: flex-start;
+}
+
+@media (max-width: 500px) {
+  .form-container {
+    border-radius: 20px;
+    width: 98%;
+  }
+  .ticket-counter {
+    width: 90%;
+  }
+  .accordion {
+    width: 95%;
+  }
+  .form-btn {
+    width: 75%;
+  }
+  .selector-container {
+    width: 95%;
+  }
+  .footer-0 {
+    font-size: 12px;
+  }
+
+}
+
+
+
+
+/* hr {
+  color: gray;
+  margin: 1.5em 0 1.5em 3em;
+} */
