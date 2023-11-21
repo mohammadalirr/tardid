@@ -32,7 +32,7 @@ function ClientContainer(props: IProps) {
   const stateLayoutLoading = useState(false)
   const [isLayoutLoading] = stateLayoutLoading
 
-  // const theme = useMantineTheme()
+  const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
 
   // // authorize user
@@ -53,18 +53,15 @@ function ClientContainer(props: IProps) {
       <AppShell
         styles={{
           main: {
-          //   overflowX: 'hidden',
-            background: 'black',
-          //   color: 'black',
-          //   margin: '0',
-          //   padding: '0'
+            overflowX: 'hidden',
+            background: '#fff',
           },
         }}
         padding='0'
         navbarOffsetBreakpoint="sm"
-        // header={<ClientHeaderLayout />}
-        //  footer={<ClientFooterLayout />}
-      > 
+        header={<ClientHeaderLayout />}
+        footer={<ClientFooterLayout />}
+      >
         {isLayoutLoading && <Loader />}
         {/* start render component */}
 
