@@ -14,7 +14,6 @@ import {
 } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
-import { getCookie, setCookie } from 'cookies-next'
 import _ from 'lodash'
 import NextApp, { AppContext, AppProps } from 'next/app'
 import Head from 'next/head'
@@ -42,9 +41,6 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const toggleColorScheme = (value?: ColorScheme) => {
     const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark')
     setColorScheme(nextColorScheme)
-    setCookie(cookieName, nextColorScheme, {
-      maxAge: 60 * 60 * 24 * 30,
-    })
   }
 
   const siteLayout = getSiteLayout(props)

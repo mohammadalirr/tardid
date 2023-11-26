@@ -3,11 +3,8 @@ import { AppShell, Loader, useMantineTheme } from '@mantine/core'
 import _ from 'lodash'
 import { ReactComponentLike } from 'prop-types'
 import React, { useState } from 'react'
-import ClientHeaderLayout from './Header'
 import Head from 'next/head'
 import { MAIN_TITLE } from '~/config/env'
-import ClientFooterLayout from './Footer'
-import { useTranslate } from '~/core/hooks/useTranslate/useTranslate'
 
 interface IProps {
   Component: ReactComponentLike
@@ -62,8 +59,6 @@ function ClientContainer(props: IProps) {
         }}
         padding='0'
         navbarOffsetBreakpoint="sm"
-        // header={<ClientHeaderLayout />}
-        //  footer={<ClientFooterLayout />}
       > 
         {isLayoutLoading && <Loader />}
         {/* start render component */}
