@@ -1,37 +1,37 @@
 @font-face {
   font-family: Tanha;
-  src: url("../../public/fonts/tanha-font-v0.10-Fontjo.com/Tanha.eot");
+  src: url("../../public/font/tanha-font-v0.10-Fontjo.com/Tanha.eot");
   src:
-    url("../../public/fonts/tanha-font-v0.10-Fontjo.com/Tanha.eot?#iefix")
+    url("../../public/font/tanha-font-v0.10-Fontjo.com/Tanha.eot?#iefix")
       format("embedded-opentype"),
-    url("../../public/fonts/tanha-font-v0.10-Fontjo.com/Tanha.woff")
+    url("../../public/font/tanha-font-v0.10-Fontjo.com/Tanha.woff")
       format("woff"),
-    url("../../public/fonts/tanha-font-v0.10-Fontjo.com/Tanha.woff2")
+    url("../../public/font/tanha-font-v0.10-Fontjo.com/Tanha.woff2")
       format("woff2"),
-    url("../../public/fonts/tanha-font-v0.10-Fontjo.com/Tanha.ttf")
+    url("../../public/font/tanha-font-v0.10-Fontjo.com/Tanha.ttf")
       format("truetype");
   font-weight: normal;
 }
 
 @font-face {
   font-family: Yekan;
-  src: url("../../public/fonts/Yekan-Bakh-FaNum/OTF/YekanBakhFaNum-regular.otf");
-  src: url("../../public/fonts/Yekan-Bakh-FaNum/Webfonts/fonts/woff/YekanBakhFaNum-regular.woff")
+  src: url("../../public/font/Yekan-Bakh-FaNum/OTF/YekanBakhFaNum-regular.otf");
+  src: url("../../public/font/Yekan-Bakh-FaNum/Webfonts/fonts/woff/YekanBakhFaNum-regular.woff")
   format("woff"),
-  url("../../public/fonts/Yekan-Bakh-FaNum/Webfonts/fonts/woff2/YekanBakhFaNum-Regular.woff2")
+  url("../../public/font/Yekan-Bakh-FaNum/Webfonts/fonts/woff2/YekanBakhFaNum-Regular.woff2")
   format("woff2"),
-  url("../../public/fonts/Yekan-Bakh-FaNum/TTF/YekanBakhFaNum-regular.ttf"),
+  url("../../public/font/Yekan-Bakh-FaNum/TTF/YekanBakhFaNum-regular.ttf"),
   format("truetype");
 }
 
 @font-face {
   font-family: YekanBold;
-  src: url("../../public/fonts/Yekan-Bakh-FaNum/OTF/YekanBakhFaNum-bold.otf");
-  src: url("../../public/fonts/Yekan-Bakh-FaNum/Webfonts/fonts/woff/YekanBakhFaNum-bold.woff")
+  src: url("../../public/font/Yekan-Bakh-FaNum/OTF/YekanBakhFaNum-bold.otf");
+  src: url("../../public/font/Yekan-Bakh-FaNum/Webfonts/fonts/woff/YekanBakhFaNum-bold.woff")
   format("woff"),
-  url("../../public/fonts/Yekan-Bakh-FaNum/Webfonts/fonts/woff2/YekanBakhFaNum-bold.woff2")
+  url("../../public/font/Yekan-Bakh-FaNum/Webfonts/fonts/woff2/YekanBakhFaNum-bold.woff2")
   format("woff2"),
-  url("../../public/fonts/Yekan-Bakh-FaNum/TTF/YekanBakhFaNum-bold.ttf"),
+  url("../../public/font/Yekan-Bakh-FaNum/TTF/YekanBakhFaNum-bold.ttf"),
   format("truetype");
 }
 
