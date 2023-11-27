@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "dev-server": "URL_ENV=staging next dev",
-    "start": "URL_ENV=staging next start -p 3003",
+    "start": "URL_ENV=staging next start -p 8080",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "build": "URL_ENV=staging next build"
