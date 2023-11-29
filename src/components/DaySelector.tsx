@@ -5,7 +5,7 @@ import useDataById from '~/data/query/Base/useDataById';
 const DaySelector = ({ handleDay, setDayS }: any) => {
   const {data} = useDataById('event', `list?title=${'نمایش آئینی تردید - آذر ۱۴۰۲'}`);
 
-  const days = useMemo(() => (data || [])?.filter((e: any) => e.capacity > (e.participants?.lenght || 0)).map((e: any) => ({
+  const days = useMemo(() => (data || [])?.filter((e: any) => e.capacity > (e.participants?.lenght || 0)).sort((a: any,b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((e: any) => ({
     date: jdate(e.date, 'DD MMM'),
     id: e.id,
     value: 1,
@@ -24,7 +24,7 @@ const DaySelector = ({ handleDay, setDayS }: any) => {
         </span>
         <br />
         <div className="days">
-          {days?.reverse().map((a: any) => (
+          {days?.map((a: any) => (
             <>
               <div className="day-space" key={a.id}>
                 <input
