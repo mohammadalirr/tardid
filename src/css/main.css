@@ -1,3 +1,5 @@
+/* @import url('https://v1.fontapi.ir/css/Yekan'); */
+
 @font-face {
   font-family: Tanha;
   src: url("/public/font/tanha-font-v0.10-Fontjo.com/Tanha.eot");
@@ -13,16 +15,28 @@
   font-weight: normal;
 }
 
-@font-face {
+/* @font-face {
   font-family: Yekan;
-  src: url("/public/font/Yekan-Bakh-FaNum/OTF/YekanBakhFaNum-regular.otf");
-  src: url("/public/font/Yekan-Bakh-FaNum/Webfonts/fonts/woff/YekanBakhFaNum-regular.woff")
+  src: url("/public/font/Yekan-Bakh-FaNum/OTF/YekanBakhFaNum-Regular.otf");
+  src: url("/public/font/Yekan-Bakh-FaNum/Webfonts/fonts/woff/YekanBakhFaNum-Regular.woff")
   format("woff"),
   url("/public/font/Yekan-Bakh-FaNum/Webfonts/fonts/woff2/YekanBakhFaNum-Regular.woff2")
   format("woff2"),
-  url("/public/font/Yekan-Bakh-FaNum/TTF/YekanBakhFaNum-regular.ttf"),
+  url("/public/font/Yekan-Bakh-FaNum/TTF/YekanBakhFaNum-Regular.ttf")
+  format("truetype");
+} */
+
+@font-face {
+  font-family: Yekan;
+  src: url("../font/Yekan-Bakh-FaNum/OTF/YekanBakhFaNum-Regular.otf");
+  src: url("../font/Yekan-Bakh-FaNum/Webfonts/fonts/woff/YekanBakhFaNum-Regular.woff")
+  format("woff"),
+  url("../font/Yekan-Bakh-FaNum/Webfonts/fonts/woff2/YekanBakhFaNum-Regular.woff2")
+  format("woff2"),
+  url("../font/Yekan-Bakh-FaNum/TTF/YekanBakhFaNum-Regular.ttf")
   format("truetype");
 }
+
 
 @font-face {
   font-family: YekanBold;

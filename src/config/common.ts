@@ -1,3 +1,6 @@
+import { e2p } from "~/utils/common";
+import dayjs from '~/config/date';
+
 function addDash (attr: string) {
   while (attr.indexOf('-') > 0) { // - is in the attribute name, but is not the first character either
     var afterDash = attr.substring(attr.indexOf('-') + 1)
@@ -65,3 +68,7 @@ export const ch = (hexCode: string, opacity: number) => {
 
   return `rgba(${r},${g},${b},${opacity / 100})`;
 }
+
+export const jdate = (date: any = new Date(), format = 'YYYY/MM/DD') => {
+  return e2p(dayjs(date).calendar('jalali').locale('fa').format(format));
+};

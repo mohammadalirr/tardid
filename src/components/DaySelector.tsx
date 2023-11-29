@@ -1,36 +1,15 @@
-const DaySelector = ({ handleDay, setDayS }) => {
-  const days = [
-    {
-      date: "6 آذر",
-      id: "doshanbeh",
-      value: 1,
-    },
-    {
-      date: "7 آذر",
-      id: "seshanbeh",
-      value: 2,
-    },
-    {
-      date: "8 آذر",
-      id: "charshanbeh",
-      value: 3,
-    },
-    {
-      date: "9 آذر",
-      id: "pangshanbeh",
-      value: 4,
-    },
-    {
-      date: "10 آذر",
-      id: "jomeh",
-      value: 5,
-    },
-    {
-      date: "11 آذر",
-      id: "shanbeh",
-      value: 6,
-    },
-  ];
+import { useMemo } from 'react';
+import { jdate } from '~/config/common';
+import useDataById from '~/data/query/Base/useDataById';
+
+const DaySelector = ({ handleDay, setDayS }: any) => {
+  const {data} = useDataById('event', `list?title=${'نمایش آئینی تردید - آذر ۱۴۰۲'}`);
+
+  const days = useMemo(() => (data || [])?.filter((e: any) => e.capacity > (e.participants?.lenght || 0)).map((e: any) => ({
+    date: jdate(e.date, 'DD MMM'),
+    id: e.id,
+    value: 1,
+  })), [data]);
 
   return (
     <>
@@ -41,11 +20,11 @@ const DaySelector = ({ handleDay, setDayS }) => {
           className="footer-0"
           style={{ fontFamily: "Yekan", lineHeight: ".5empx" }}
         >
-          نمایش در این شب‌ها از ساعت 19:30 تا 21 برگزار خواهد شد.
+          نمایش در این شب‌ها از ساعت 19 تا 21 برگزار خواهد شد."
         </span>
         <br />
         <div className="days">
-          {days.map((a) => (
+          {days?.reverse().map((a: any) => (
             <>
               <div className="day-space" key={a.id}>
                 <input

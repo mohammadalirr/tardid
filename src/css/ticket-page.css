@@ -31,6 +31,7 @@
   border-radius: 5px;
   z-index: 1;
   animation: shadowAnimate-p 5s ease infinite alternate;
+  padding-top: .2em;
 
 }
 
@@ -50,7 +51,6 @@
   align-items: center;
   width: 80%;
 }
-
 
 .ticket-counter {
   margin: 1em 0;
@@ -106,6 +106,10 @@
   100% {
     box-shadow: 0px 0px 150px -20px rgb(134, 132, 132);
   }
+}
+
+.selector-container {
+  margin-top: 1em;
 }
 
 .input-group-text:active {
@@ -254,3 +258,5 @@
   }
 
 }
+
+

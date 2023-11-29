@@ -14,7 +14,6 @@ const Ticket = ({
   setGenderA,
   phoneA,
 }) => {
-
   const targetId = `collapse-${index}`;
 
   const titleRef = useRef();

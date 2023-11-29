@@ -7,6 +7,9 @@ import Link from "next/link";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import axios from "axios";
+import { e2p } from "../utils/common";
+import { useMutation } from '@tanstack/react-query';
+import BaseRepository from '~/data/repository/BaseRepository';
 
 let TicketPage = () => {
   const [ticketCount, setTicketCount] = useState(1);
@@ -16,10 +19,10 @@ let TicketPage = () => {
       lastName: "",
       phoneNumber: "",
       gender: "",
-      leader: "true",
-      day: "",
-      ticket: "",
-      ticketCode: "",
+      isLeader: true,
+      event: "",
+      relation: "",
+      ticketCount: "",
     })
   );
   const [firstNameA, setFirstNameA] = useState(false);
@@ -31,6 +34,8 @@ let TicketPage = () => {
   const [daySelect, setDaySelect] = useState(false);
   const [dayS, setDayS] = useState();
 
+  const [selected, setSelected] = useState(null);
+
   const ticketStatus = useRef();
 
   const handleCount = useCallback((count) => {
@@ -39,7 +44,6 @@ let TicketPage = () => {
       setTicketCount(isNumber);
     } else if (count > 15) {
       setTicketCount(15);
-    
     } else {
       setTicketCount(0);
     }
@@ -56,7 +60,13 @@ let TicketPage = () => {
 
   useEffect(() => {
     const newData = [...ticketData];
-    newData[0] = { ...newData[0], ticket: ticketCount };
+    newData[0] = { ...newData[0], relation: selected };
+    setTicketData(newData);
+  }, [selected]);
+
+  useEffect(() => {
+    const newData = [...ticketData];
+    newData[0] = { ...newData[0], ticketCount: ticketCount };
     setTicketData(newData);
   }, [ticketCount]);
 
@@ -104,17 +114,41 @@ let TicketPage = () => {
   //   // axios.post(url, ticketData);
   // };
 
+  const eventParticipantMutation = useMutation((data) => new BaseRepository({ endpoint: '/eventParticipant/create' }).create(data));
+  const userMutation = useMutation((data) => new BaseRepository({ endpoint: '/ty329djaa' }).create(data));
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(ticketData);
 
-    const server_URL = "http://localhost:9000";
-    const url = `${server_URL}/tasks`;
-
     try {
-      const response = await axios.post(url, ticketData);
+      const data_ = ticketData.map(e => ({...e, mobile: e.phoneNumber, nationalCode: e.phoneNumber}))
+      const teamList = data_.filter(e => !e.isLeader)
+      const leader = data_.filter(e => e.isLeader)[0]
+      const team = await Promise.all(teamList.map(async e => {
+        const userRes = await userMutation.mutateAsync({...e, roles: ['foreign']})
+        console.log('userRes', userRes)
+        const res = await eventParticipantMutation.mutateAsync({
+          user: userRes?.data?.data?.id,
+          event: leader.day,
+          relation: leader.relation,
+        })
+        console.log('res', res)
+        return res?.data?.data?.id
+      }))
+      const leaderRes = await userMutation.mutateAsync({...leader, roles: ['foreign']})
+      console.log('leaderRes', leaderRes)
+      const response = await eventParticipantMutation.mutateAsync({
+        user: leaderRes?.data?.data?.id,
+        event: leader.day,
+        isLeader: true,
+        relation: leader.relation,
+        team
+      })
+      console.log('response', response)
+      // const response = await eventParticipantMutation.mutateAsync()
       const { status } = response;
-      if (status === 201) {
+      if (status === 200) {
         console.log("Successfully submitted");
         setTicketCount("");
         setTicketData("");
@@ -150,9 +184,8 @@ let TicketPage = () => {
       counterRef.current.style.color = "red";
     } else {
       counterRef.current.style.color = "black";
-
     }
-  }, [ticketCount])
+  }, [ticketCount]);
 
   return (
     <>
@@ -176,6 +209,7 @@ let TicketPage = () => {
             <div
               class="alert alert-success mx-3 suc"
               role="alert"
+              style={{fontFamily: "Yekan",}}
               ref={sucAlert}
             >
               <h4 class="alert-heading mb-3">
@@ -183,18 +217,27 @@ let TicketPage = () => {
                 ثبت شد.
               </h4>
               <p>
-                بلیت / بلیت های شما به شماره همراهتان پیامک خواهد شد؛ منتظر حضور
+                بلیت / بلیت های شما به همراه لینک پرداخت به شماره همراهتان پیامک خواهد شد؛ منتظر حضور
                 گرمتان هستیم.
               </p>
               <hr />
               <p class="mb-0">
-                <a href="#" target="blank" className="btn btn-success m-1">عضویت در کنال</a>
-                <Link href="/PardakhtPage" className="btn btn-success m-1">حمایت مالی</Link>
+                <a
+                  href="https://ble.ir/join/DwV18GhH6g"
+                  target="blank"
+                  className="btn btn-success m-1"
+                >
+                  عضویت در کانال
+                </a>
+                {/* <Link href="/PardakhtPage" className="btn btn-success m-1">
+                  حمایت مالی
+                </Link> */}
               </p>
             </div>
             <div
               class="alert alert-danger mx-3 fal"
               role="alert"
+              style={{fontFamily: "Yekan",}}
               ref={falAlert}
             >
               <h4 class="alert-heading mb-3">
@@ -205,11 +248,37 @@ let TicketPage = () => {
                 لطفا دوباره تلاش کنید، یا با پشتیبانی تماس بگیرید.
               </p>
               <hr />
-              <a href="#" className="btn btn-danger m-1">تماس با پشتیبانی</a>
-              <Link href="/" className="btn btn-danger m-1">تلاش دوباره</Link>
+              <a href="tel:+989336683232" className="btn btn-danger m-1">
+                تماس با پشتیبانی
+              </a>
+              <Link href="/" className="btn btn-danger m-1">
+                تلاش دوباره
+              </Link>
             </div>
 
             <div className="is-hidden" ref={isHidden}>
+              <div
+                class="form-floating"
+                style={{ width: "65%", padding: ".2em 0 0 0" }}
+              >
+                <select
+                  style={{ fontFamily: "Yekan" }}
+                  className="form-select"
+                  id="floatingSelect"
+                  aria-label="Floating label select example"
+                  onChange={(x) => setSelected(x.target.value)}
+                  value={selected}
+                >
+                  <option selected>هیچکدام</option>
+                  <option value="معرفی نزدیکان">معرفی نزدیکان</option>
+                  <option value="شبکه‌های اجتماعی">شبکه‌های اجتماعی</option>
+                  <option value="پوستر‌ها و بیلبورد‌های شهری">پوستر‌ها و بیلبورد‌های شهری</option>
+                </select>
+                <label for="floatingSelect">
+                  از کدام طریق با ما آشنا شدید؟
+                </label>
+              </div>
+
               <DaySelector setDayS={setDayS} />
 
               <div className="second-container" ref={secondContainer}>
@@ -219,7 +288,7 @@ let TicketPage = () => {
                     className="form-label"
                     style={{ fontFamily: "Vazirmatn" }}
                   >
-                    تعداد بلیت :{" "}
+                    تعداد بلیت را مشخص کنید :{" "}
                   </label>
                   <br />
                   <span
@@ -233,16 +302,30 @@ let TicketPage = () => {
                     <span
                       style={{
                         fontSize: "13px",
-                        color: "red"
+                        color: "red",
                       }}
                     >
                       15
                     </span>{" "}
                     بلیت (مدارس/سازمان ها) می‌بایست با پشتیبانی تماس بگیرید:
                   </span>
-                  <span className="posh-chip" type="button">
-                    09120000000
-                  </span>
+                  <a href="tel:+989336683232">
+                    <span
+                      className="posh-chip"
+                      type="button"
+                      style={{ fontFamily: "Yekan" }}
+                    >
+                     09336683232
+                    </span>
+                  </a>
+                  <p style={{
+                      fontFamily: "Yekan",
+                      fontSize: "15px",
+                      fontWeight: 'bold',
+                      textAlign: 'center',
+                      marginTop: 20,
+                      color: "green",
+                    }}>هزینه هر بلیط ۱۰/۰۰۰ تومان می باشد</p>
                   <div className="input-group" style={{ marginTop: "1em" }}>
                     <br />
                     <span
@@ -255,7 +338,7 @@ let TicketPage = () => {
                       <ArrowDropUpIcon />
                     </span>
                     <input
-                    ref={counterRef}
+                      ref={counterRef}
                       type="text"
                       className="form-control"
                       id="counter"
@@ -264,7 +347,7 @@ let TicketPage = () => {
                       aria-describedby="t"
                       value={ticketCount}
                       onChange={(x) => handleCount(x.target.value)}
-                      style={{ fontFamily: "YekanBold" }}
+                      style={{ fontFamily: "Yekan" }}
                     />
                     <span
                       type="button"
