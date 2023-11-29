@@ -37,7 +37,7 @@ const MainGallery = () => {
               <div className="col col-3 column-g">
                 {dataImagesI.map((image, index) => (
                   <a
-                    href={`http://mesbahtheater.ir/static/hadis-images/main/${image.title}.jpg`}
+                    href={`/static/hadis-images/main/${image.title}.jpg`}
                     target="blank"
                   >
                     <img
@@ -52,7 +52,7 @@ const MainGallery = () => {
               <div className="col col-3 column-g">
                 {dataImagesII.map((image, index) => (
                   <a
-                    href={`http://mesbahtheater.ir/static/hadis-images/main/${image.title}.jpg`}
+                    href={`/static/hadis-images/main/${image.title}.jpg`}
                     target="blank"
                   >
                     <img
@@ -67,7 +67,7 @@ const MainGallery = () => {
               <div className="col col-3 column-g">
                 {dataImagesIII.map((image, index) => (
                   <a
-                    href={`http://mesbahtheater.ir/static/hadis-images/main/${image.title}.jpg`}
+                    href={`/static/hadis-images/main/${image.title}.jpg`}
                     target="blank"
                   >
                     <img
@@ -82,7 +82,7 @@ const MainGallery = () => {
               <div className="col col-3 column-g">
                 {dataImagesIIII.map((image, index) => (
                   <a
-                    href={`http://mesbahtheater.ir/static/hadis-images/main/${image.title}.jpg`}
+                    href={`/static/hadis-images/main/${image.title}.jpg`}
                     target="blank"
                   >
                     <img

@@ -29,6 +29,7 @@ let TicketPage = () => {
   const [lastNameA, setLastNameA] = useState(false);
   const [phoneA, setPhoneA] = useState(false);
   const [genderA, setGenderA] = useState(false);
+  const [relationA, setRelationA] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const [daySelect, setDaySelect] = useState(false);
@@ -97,12 +98,12 @@ let TicketPage = () => {
   };
 
   useEffect(() => {
-    if (firstNameA && lastNameA && phoneA && genderA) {
+    if (firstNameA && lastNameA && phoneA && genderA && relationA) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [firstNameA, lastNameA, phoneA, genderA]);
+  }, [firstNameA, lastNameA, phoneA, genderA, relationA]);
 
   useEffect(() => {
     console.log(firstNameA);
@@ -187,6 +188,14 @@ let TicketPage = () => {
     }
   }, [ticketCount]);
 
+  const options = [
+    'بنر ها و پوستر های سطح شهر',
+    'معرفی توسط مدرسه ، دانشگاه و محل کار',
+    'فضای مجازی و شبکه های اجتماعی',
+    'معرفی دوستان و آشنایان',
+    'سایر'
+  ]
+
   return (
     <>
       {/* <ParticlesContainer /> */}
@@ -217,7 +226,7 @@ let TicketPage = () => {
                 ثبت شد.
               </h4>
               <p>
-                بلیت / بلیت های شما به همراه لینک پرداخت به شماره همراهتان پیامک خواهد شد؛ منتظر حضور
+                بلیت / بلیت های شما به شماره همراهتان پیامک خواهد شد؛ منتظر حضور
                 گرمتان هستیم.
               </p>
               <hr />
@@ -266,13 +275,16 @@ let TicketPage = () => {
                   className="form-select"
                   id="floatingSelect"
                   aria-label="Floating label select example"
-                  onChange={(x) => setSelected(x.target.value)}
+                  onChange={(x) => {
+                    setSelected(x.target.value)
+                    setRelationA(true)
+                  }}
                   value={selected}
                 >
-                  <option selected>هیچکدام</option>
-                  <option value="معرفی نزدیکان">معرفی نزدیکان</option>
-                  <option value="شبکه‌های اجتماعی">شبکه‌های اجتماعی</option>
-                  <option value="پوستر‌ها و بیلبورد‌های شهری">پوستر‌ها و بیلبورد‌های شهری</option>
+                  <option value={''} disabled>انتخاب</option>
+                  {options.map(e => {
+                    return <option value={e}>{e}</option>
+                  })}
                 </select>
                 <label for="floatingSelect">
                   از کدام طریق با ما آشنا شدید؟
@@ -318,14 +330,14 @@ let TicketPage = () => {
                      09336683232
                     </span>
                   </a>
-                  <p style={{
+                  {/* <p style={{
                       fontFamily: "Yekan",
                       fontSize: "15px",
                       fontWeight: 'bold',
                       textAlign: 'center',
                       marginTop: 20,
                       color: "green",
-                    }}>هزینه هر بلیط ۱۰/۰۰۰ تومان می باشد</p>
+                    }}></p> */}
                   <div className="input-group" style={{ marginTop: "1em" }}>
                     <br />
                     <span
@@ -343,7 +355,7 @@ let TicketPage = () => {
                       className="form-control"
                       id="counter"
                       // placeholder={ticketCount}
-                      inputMode="none"
+                      // inputMode="none"
                       aria-describedby="t"
                       value={ticketCount}
                       onChange={(x) => handleCount(x.target.value)}
