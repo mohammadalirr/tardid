@@ -106,7 +106,7 @@ const Glass = () => {
                   : پشتیبانی{" "}
                 </span>
               </span>
-              <div style={{marginTop: '1em'}} dangerouslySetInnerHTML={{__html: `<a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=427342&Code=pSuCrmccRXMOjElR46ua02RemoTbMMeT'><img referrerpolicy='origin' style="height: 150px; width: 120px; border-radius: 10px" src='https://trustseal.enamad.ir/logo.aspx?id=427342&Code=pSuCrmccRXMOjElR46ua02RemoTbMMeT' alt='' style='cursor:pointer' Code='pSuCrmccRXMOjElR46ua02RemoTbMMeT'></a>`}} />
+              <div style={{marginTop: '1em'}} dangerouslySetInnerHTML={{__html: `<a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=427342&Code=pSuCrmccRXMOjElR46ua02RemoTbMMeT'><img referrerpolicy='origin' style="height: 150px; width: 120px; border-radius: 10px; background: #fff" src='/static/enamad-zero-star.png' alt='' style='cursor:pointer' Code='pSuCrmccRXMOjElR46ua02RemoTbMMeT'></a>`}} />
 
             </div>
             <div className="footer-logo">
