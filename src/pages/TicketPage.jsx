@@ -35,7 +35,7 @@ let TicketPage = () => {
   const [daySelect, setDaySelect] = useState(false);
   const [dayS, setDayS] = useState();
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState('');
 
   const ticketStatus = useRef();
 
@@ -98,16 +98,16 @@ let TicketPage = () => {
   };
 
   useEffect(() => {
-    if (firstNameA && lastNameA && phoneA && genderA && relationA) {
+    if (firstNameA && lastNameA && phoneA && relationA) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [firstNameA, lastNameA, phoneA, genderA, relationA]);
+  }, [firstNameA, lastNameA, phoneA, relationA]);
 
   useEffect(() => {
-    console.log(firstNameA);
-  }, [firstNameA, lastNameA, phoneA, genderA]);
+    console.log({firstNameA, lastNameA, phoneA, relationA});
+  }, [firstNameA, lastNameA, phoneA, relationA]);
 
   // const server_URL = "http://localhost:9000";
   // const submit = (ticketData) => {
@@ -212,6 +212,7 @@ let TicketPage = () => {
       <form
         className="container needs-validation form-parent"
         onSubmit={handleSubmit}
+        style={{ fontFamily: "Vazirmatn" }}
       >
         <div className="row row-t">
           <div className="form-container col-11 col-sm-11 col-md-9 col-lg-7 col-xl-5 col-xxl-5">
@@ -266,10 +267,18 @@ let TicketPage = () => {
             </div>
 
             <div className="is-hidden" ref={isHidden}>
+              
+
+              <DaySelector dayS={dayS} setDayS={setDayS} />
+
+              <div style={{textAlign: 'right', width: '90%', marginBottom: '0.6rem'}}>
+                  از کدام طریق با ما آشنا شدید؟ <span className="imp">*</span>
+              </div>
               <div
                 class="form-floating"
-                style={{ width: "65%", padding: ".2em 0 0 0" }}
+                style={{ width: "90%", padding: ".2em 0 0 0" }}
               >
+                
                 <select
                   style={{ fontFamily: "Yekan" }}
                   className="form-select"
@@ -281,17 +290,15 @@ let TicketPage = () => {
                   }}
                   value={selected}
                 >
-                  <option value={''} disabled>انتخاب</option>
+                  <option value={''} disabled>--</option>
                   {options.map(e => {
                     return <option value={e}>{e}</option>
                   })}
                 </select>
                 <label for="floatingSelect">
-                  از کدام طریق با ما آشنا شدید؟
+                لطفا یک گزینه را انتخاب کنید
                 </label>
               </div>
-
-              <DaySelector setDayS={setDayS} />
 
               <div className="second-container" ref={secondContainer}>
                 <div className="ticket-counter">

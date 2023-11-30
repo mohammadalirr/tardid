@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { jdate } from '~/config/common';
 import useDataById from '~/data/query/Base/useDataById';
 
-const DaySelector = ({ handleDay, setDayS }: any) => {
+const DaySelector = ({ dayS, setDayS }: any) => {
   const {data} = useDataById('event', `list?title=${'نمایش آئینی تردید - آذر ۱۴۰۲'}`);
 
   const days = useMemo(() => (data || [])?.filter((e: any) => e.capacity > (e.participants?.lenght || 0)).sort((a: any,b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((e: any) => ({
@@ -10,6 +10,10 @@ const DaySelector = ({ handleDay, setDayS }: any) => {
     id: e.id,
     value: 1,
   })), [data]);
+
+  useEffect(() => {
+    setDayS(days[0]?.id)
+  }, [days])
 
   return (
     <>
@@ -34,6 +38,7 @@ const DaySelector = ({ handleDay, setDayS }: any) => {
                   id={`${a.id}-outlined`}
                   autoComplete="off"
                   value={a.id}
+                  checked={dayS === a.id}
                   onChange={(a) => setDayS(a.target.value)}
                 />
                 <label
