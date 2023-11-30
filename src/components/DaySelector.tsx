@@ -20,7 +20,7 @@ const DaySelector = ({ handleDay, setDayS }: any) => {
           className="footer-0"
           style={{ fontFamily: "Yekan", lineHeight: ".5empx" }}
         >
-          نمایش در این شب‌ها از ساعت 19 تا 21 برگزار خواهد شد."
+          نمایش در این شب‌ها از ساعت 19 تا 21 برگزار خواهد شد.
         </span>
         <br />
         <div className="days">

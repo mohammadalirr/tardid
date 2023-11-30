@@ -2,8 +2,8 @@ const env = process.env.URL_ENV ?? 'development'
 
 const mapApiUrl = {
   development: 'http://127.0.0.1:4000/api',
-  staging: 'http://5.34.202.162:4000/api',
-  production: 'http://5.34.202.162:4000/api',
+  staging: 'https://core.meshkatapp.ir/api',
+  production: 'https://core.meshkatapp.ir/api',
 }
 
 // @ts-expect-error
