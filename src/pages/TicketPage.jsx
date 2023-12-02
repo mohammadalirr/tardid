@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import Ticket from "../components/Ticket";
 import DaySelector from "../components/DaySelector";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, LoadingOverlay } from "@mantine/core";
 import Link from "next/link";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -12,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import BaseRepository from "~/data/repository/BaseRepository";
 
 let TicketPage = () => {
+  const [loading, setLoading] = useState(false);
   const [ticketCount, setTicketCount] = useState(1);
   const [ticketData, setTicketData] = useState(
     Array(ticketCount).fill({
@@ -134,6 +135,7 @@ let TicketPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(ticketData);
+    setLoading(true)
 
     try {
       const data_ = ticketData.map((e) => ({
@@ -154,7 +156,7 @@ let TicketPage = () => {
             user: userRes?.data?.data?.id,
             event: leader.day,
             relation: leader.relation,
-            // hasParking: leader.parking,
+            hasParking: leader.hasParking,
           });
           console.log("res", res);
           return res?.data?.data?.id;
@@ -170,12 +172,13 @@ let TicketPage = () => {
         event: leader.day,
         isLeader: true,
         relation: leader.relation,
-        // hasParking: leader.parking,
+        hasParking: leader.hasParking,
         team,
       });
       console.log("response", response);
       // const response = await eventParticipantMutation.mutateAsync()
       const { status } = response;
+      setLoading(false)
       if (status === 200) {
         console.log("Successfully submitted");
         setTicketCount("");
@@ -185,6 +188,7 @@ let TicketPage = () => {
         sucAlert.current.style.display = "block";
       }
     } catch (err) {
+      setLoading(false)
       isHidden.current.style.display = "none";
       falAlert.current.style.display = "block";
       console.error(err.message);
@@ -232,6 +236,7 @@ let TicketPage = () => {
   return (
     <>
       {/* <ParticlesContainer /> */}
+      <LoadingOverlay pos='fixed' visible={loading} />
       <div
         style={{ position: "fixed", top: ".2em", left: ".5em", zIndex: "10" }}
       >
