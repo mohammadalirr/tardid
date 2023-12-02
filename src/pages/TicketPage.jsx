@@ -197,6 +197,8 @@ let TicketPage = () => {
   const falAlert = useRef();
   const counterRef = useRef();
 
+  const copy = useRef();
+
   useEffect(() => {
     console.log(daySelect);
     if (daySelect === true) {
@@ -221,6 +223,11 @@ let TicketPage = () => {
     "معرفی دوستان و آشنایان",
     "سایر",
   ];
+
+  const copyText = () => {
+    navigator.clipboard.writeText(5022291087040398);
+    copy.current.innerText = "✔ کپی شد ";
+  };
 
   return (
     <>
@@ -263,8 +270,30 @@ let TicketPage = () => {
                   target="blank"
                   className="btn btn-success m-1"
                 >
-                  عضویت در کانال
+                  کانال بله
                 </a>
+                <a
+                  href="https://t.me/mesbah_artgroup"
+                  target="blank"
+                  className="btn btn-success m-1"
+                >
+                  کانال تلگرام
+                </a>
+                <hr />
+                <button
+                style={{width:'100%'}}
+                  onClick={copyText}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  <span>حمایت مالی</span>
+                  <hr className="mx-1" />
+                  <span>5022291087040398</span>
+                  <br />
+                  <span style={{ fontSize: "11px" }}> سیدمحمدحسن حسینی</span>
+                  <br />
+                  <span style={{ fontSize: "smaller" }} ref={copy}></span>
+                </button>
                 {/* <Link href="/PardakhtPage" className="btn btn-success m-1">
                   حمایت مالی
                 </Link> */}
@@ -435,7 +464,9 @@ let TicketPage = () => {
                     margin: "2em 0 0.6rem 0",
                   }}
                 >
-             آیا با خودرو تشریف می‌آورید؟ <span style={{fontSize:"13px"}}>(جهت مدیریت پارکینگ)</span> <span className="imp">*</span>
+                  آیا با خودرو تشریف می‌آورید؟{" "}
+                  <span style={{ fontSize: "13px" }}>(جهت مدیریت پارکینگ)</span>{" "}
+                  <span className="imp">*</span>
                 </div>
 
                 <div
@@ -462,38 +493,40 @@ let TicketPage = () => {
                   <label for="car-floating">لطفا یک گزینه را انتخاب کنید</label>
                 </div>
                 <div
-                style={{
-                  textAlign: "right",
-                  width: "95%",
-                  margin: "2em 0 0.6rem 0",
-                }}
-              >
-                از کدام طریق با ما آشنا شدید؟ <span className="imp">*</span>
-              </div>
-              <div
-                className="form-floating"
-                style={{ width: "95%", padding: ".2em 0 0 0" }}
-              >
-                <select
-                  style={{ fontFamily: "Yekan" }}
-                  className="form-select"
-                  id="floatingSelect"
-                  aria-label="Floating label select example"
-                  onChange={(x) => {
-                    setSelected(x.target.value);
-                    setRelationA(true);
+                  style={{
+                    textAlign: "right",
+                    width: "95%",
+                    margin: "2em 0 0.6rem 0",
                   }}
-                  value={selected}
                 >
-                  <option value={""} disabled>
-                    --
-                  </option>
-                  {options.map((e) => {
-                    return <option value={e}>{e}</option>;
-                  })}
-                </select>
-                <label for="floatingSelect">لطفا یک گزینه را انتخاب کنید</label>
-              </div>
+                  از کدام طریق با ما آشنا شدید؟ <span className="imp">*</span>
+                </div>
+                <div
+                  className="form-floating"
+                  style={{ width: "95%", padding: ".2em 0 0 0" }}
+                >
+                  <select
+                    style={{ fontFamily: "Yekan" }}
+                    className="form-select"
+                    id="floatingSelect"
+                    aria-label="Floating label select example"
+                    onChange={(x) => {
+                      setSelected(x.target.value);
+                      setRelationA(true);
+                    }}
+                    value={selected}
+                  >
+                    <option value={""} disabled>
+                      --
+                    </option>
+                    {options.map((e) => {
+                      return <option value={e}>{e}</option>;
+                    })}
+                  </select>
+                  <label for="floatingSelect">
+                    لطفا یک گزینه را انتخاب کنید
+                  </label>
+                </div>
 
                 <div
                   className="d-inline-block form-btn-parent"
