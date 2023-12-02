@@ -8,8 +8,8 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import axios from "axios";
 import { e2p } from "../utils/common";
-import { useMutation } from '@tanstack/react-query';
-import BaseRepository from '~/data/repository/BaseRepository';
+import { useMutation } from "@tanstack/react-query";
+import BaseRepository from "~/data/repository/BaseRepository";
 
 let TicketPage = () => {
   const [ticketCount, setTicketCount] = useState(1);
@@ -22,6 +22,7 @@ let TicketPage = () => {
       isLeader: true,
       event: "",
       relation: "",
+      hasParking: "",
       ticketCount: "",
     })
   );
@@ -30,12 +31,14 @@ let TicketPage = () => {
   const [phoneA, setPhoneA] = useState(false);
   const [genderA, setGenderA] = useState(false);
   const [relationA, setRelationA] = useState(false);
+  const [carA, setCarA] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const [daySelect, setDaySelect] = useState(false);
   const [dayS, setDayS] = useState();
 
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState("");
+  const [isCar, setIsCar] = useState("");
 
   const ticketStatus = useRef();
 
@@ -58,6 +61,12 @@ let TicketPage = () => {
       setDaySelect(true);
     }
   }, [dayS, daySelect]);
+
+  useEffect(() => {
+    const newData = [...ticketData];
+    newData[0] = { ...newData[0], hasParking: isCar };
+    setTicketData(newData);
+  }, [isCar]);
 
   useEffect(() => {
     const newData = [...ticketData];
@@ -98,15 +107,15 @@ let TicketPage = () => {
   };
 
   useEffect(() => {
-    if (firstNameA && lastNameA && phoneA && relationA) {
+    if (firstNameA && lastNameA && phoneA && relationA && carA) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [firstNameA, lastNameA, phoneA, relationA]);
+  }, [firstNameA, lastNameA, phoneA, relationA, carA]);
 
   useEffect(() => {
-    console.log({firstNameA, lastNameA, phoneA, relationA});
+    console.log({ firstNameA, lastNameA, phoneA, relationA });
   }, [firstNameA, lastNameA, phoneA, relationA]);
 
   // const server_URL = "http://localhost:9000";
@@ -115,38 +124,56 @@ let TicketPage = () => {
   //   // axios.post(url, ticketData);
   // };
 
-  const eventParticipantMutation = useMutation((data) => new BaseRepository({ endpoint: '/eventParticipant/create' }).create(data));
-  const userMutation = useMutation((data) => new BaseRepository({ endpoint: '/ty329djaa' }).create(data));
+  const eventParticipantMutation = useMutation((data) =>
+    new BaseRepository({ endpoint: "/eventParticipant/create" }).create(data)
+  );
+  const userMutation = useMutation((data) =>
+    new BaseRepository({ endpoint: "/ty329djaa" }).create(data)
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(ticketData);
 
     try {
-      const data_ = ticketData.map(e => ({...e, mobile: e.phoneNumber, nationalCode: e.phoneNumber}))
-      const teamList = data_.filter(e => !e.isLeader)
-      const leader = data_.filter(e => e.isLeader)[0]
-      const team = await Promise.all(teamList.map(async e => {
-        const userRes = await userMutation.mutateAsync({...e, roles: ['foreign']})
-        console.log('userRes', userRes)
-        const res = await eventParticipantMutation.mutateAsync({
-          user: userRes?.data?.data?.id,
-          event: leader.day,
-          relation: leader.relation,
+      const data_ = ticketData.map((e) => ({
+        ...e,
+        mobile: e.phoneNumber,
+        nationalCode: e.phoneNumber,
+      }));
+      const teamList = data_.filter((e) => !e.isLeader);
+      const leader = data_.filter((e) => e.isLeader)[0];
+      const team = await Promise.all(
+        teamList.map(async (e) => {
+          const userRes = await userMutation.mutateAsync({
+            ...e,
+            roles: ["foreign"],
+          });
+          console.log("userRes", userRes);
+          const res = await eventParticipantMutation.mutateAsync({
+            user: userRes?.data?.data?.id,
+            event: leader.day,
+            relation: leader.relation,
+            // hasParking: leader.parking,
+          });
+          console.log("res", res);
+          return res?.data?.data?.id;
         })
-        console.log('res', res)
-        return res?.data?.data?.id
-      }))
-      const leaderRes = await userMutation.mutateAsync({...leader, roles: ['foreign']})
-      console.log('leaderRes', leaderRes)
+      );
+      const leaderRes = await userMutation.mutateAsync({
+        ...leader,
+        roles: ["foreign"],
+      });
+      console.log("leaderRes", leaderRes);
       const response = await eventParticipantMutation.mutateAsync({
         user: leaderRes?.data?.data?.id,
         event: leader.day,
         isLeader: true,
         relation: leader.relation,
-        team
-      })
-      console.log('response', response)
+        // hasParking: leader.parking,
+        team,
+      });
+      console.log("response", response);
       // const response = await eventParticipantMutation.mutateAsync()
       const { status } = response;
       if (status === 200) {
@@ -159,7 +186,6 @@ let TicketPage = () => {
       }
     } catch (err) {
       isHidden.current.style.display = "none";
-
       falAlert.current.style.display = "block";
       console.error(err.message);
     }
@@ -189,12 +215,12 @@ let TicketPage = () => {
   }, [ticketCount]);
 
   const options = [
-    'بنر ها و پوستر های سطح شهر',
-    'معرفی توسط مدرسه ، دانشگاه و محل کار',
-    'فضای مجازی و شبکه های اجتماعی',
-    'معرفی دوستان و آشنایان',
-    'سایر'
-  ]
+    "بنر ها و پوستر های سطح شهر",
+    "معرفی توسط مدرسه ، دانشگاه و محل کار",
+    "فضای مجازی و شبکه های اجتماعی",
+    "معرفی دوستان و آشنایان",
+    "سایر",
+  ];
 
   return (
     <>
@@ -219,7 +245,7 @@ let TicketPage = () => {
             <div
               class="alert alert-success mx-3 suc"
               role="alert"
-              style={{fontFamily: "Yekan",}}
+              style={{ fontFamily: "Yekan" }}
               ref={sucAlert}
             >
               <h4 class="alert-heading mb-3">
@@ -247,7 +273,7 @@ let TicketPage = () => {
             <div
               class="alert alert-danger mx-3 fal"
               role="alert"
-              style={{fontFamily: "Yekan",}}
+              style={{ fontFamily: "Yekan" }}
               ref={falAlert}
             >
               <h4 class="alert-heading mb-3">
@@ -267,38 +293,41 @@ let TicketPage = () => {
             </div>
 
             <div className="is-hidden" ref={isHidden}>
-              
-
               <DaySelector dayS={dayS} setDayS={setDayS} />
 
-              <div style={{textAlign: 'right', width: '90%', marginBottom: '0.6rem'}}>
-                  از کدام طریق با ما آشنا شدید؟ <span className="imp">*</span>
+              {/* <div
+                style={{
+                  textAlign: "right",
+                  width: "90%",
+                  marginBottom: "0.6rem",
+                }}
+              >
+                از کدام طریق با ما آشنا شدید؟ <span className="imp">*</span>
               </div>
               <div
-                class="form-floating"
+                className="form-floating"
                 style={{ width: "90%", padding: ".2em 0 0 0" }}
               >
-                
                 <select
                   style={{ fontFamily: "Yekan" }}
                   className="form-select"
                   id="floatingSelect"
                   aria-label="Floating label select example"
                   onChange={(x) => {
-                    setSelected(x.target.value)
-                    setRelationA(true)
+                    setSelected(x.target.value);
+                    setRelationA(true);
                   }}
                   value={selected}
                 >
-                  <option value={''} disabled>--</option>
-                  {options.map(e => {
-                    return <option value={e}>{e}</option>
+                  <option value={""} disabled>
+                    --
+                  </option>
+                  {options.map((e) => {
+                    return <option value={e}>{e}</option>;
                   })}
                 </select>
-                <label for="floatingSelect">
-                لطفا یک گزینه را انتخاب کنید
-                </label>
-              </div>
+                <label for="floatingSelect">لطفا یک گزینه را انتخاب کنید</label>
+              </div> */}
 
               <div className="second-container" ref={secondContainer}>
                 <div className="ticket-counter">
@@ -334,7 +363,7 @@ let TicketPage = () => {
                       type="button"
                       style={{ fontFamily: "Yekan" }}
                     >
-                     09336683232
+                      09336683232
                     </span>
                   </a>
                   {/* <p style={{
@@ -394,20 +423,84 @@ let TicketPage = () => {
                     setPhoneA={setPhoneA}
                     setGenderA={setGenderA}
                     phoneA={phoneA}
-                    // handleDayS={handleDayS}
-                    // setHandleDayS={setHandleDayS}
                     isDisabled={isDisabled}
                     firstNameA={firstNameA}
                     lastNameA={lastNameA}
-                    genderA={genderA}
                   />
                 ))}
-                <span
+                <div
+                  style={{
+                    textAlign: "right",
+                    width: "95%",
+                    margin: "2em 0 0.6rem 0",
+                  }}
+                >
+             آیا با خودرو تشریف می‌آورید؟ <span style={{fontSize:"13px"}}>(جهت مدیریت پارکینگ)</span> <span className="imp">*</span>
+                </div>
+
+                <div
+                  className="form-floating"
+                  style={{ width: "95%", padding: ".2em 0 0 0" }}
+                >
+                  <select
+                    style={{ fontFamily: "Yekan" }}
+                    className="form-select"
+                    id="car-floating"
+                    aria-label="Floating label select example"
+                    onChange={(x) => {
+                      setIsCar(x.target.value);
+                      setCarA(true);
+                    }}
+                    value={isCar}
+                  >
+                    <option value={""} disabled>
+                      --
+                    </option>
+                    <option value="Yes">بله</option>
+                    <option value="No">خیر</option>
+                  </select>
+                  <label for="car-floating">لطفا یک گزینه را انتخاب کنید</label>
+                </div>
+                <div
+                style={{
+                  textAlign: "right",
+                  width: "95%",
+                  margin: "2em 0 0.6rem 0",
+                }}
+              >
+                از کدام طریق با ما آشنا شدید؟ <span className="imp">*</span>
+              </div>
+              <div
+                className="form-floating"
+                style={{ width: "95%", padding: ".2em 0 0 0" }}
+              >
+                <select
+                  style={{ fontFamily: "Yekan" }}
+                  className="form-select"
+                  id="floatingSelect"
+                  aria-label="Floating label select example"
+                  onChange={(x) => {
+                    setSelected(x.target.value);
+                    setRelationA(true);
+                  }}
+                  value={selected}
+                >
+                  <option value={""} disabled>
+                    --
+                  </option>
+                  {options.map((e) => {
+                    return <option value={e}>{e}</option>;
+                  })}
+                </select>
+                <label for="floatingSelect">لطفا یک گزینه را انتخاب کنید</label>
+              </div>
+
+                <div
                   className="d-inline-block form-btn-parent"
                   tabIndex="0"
                   data-bs-toggle="popover"
                   data-bs-trigger="hover focus"
-                  data-bs-content="Disabled popover"
+                  data-bs-content="popover"
                 >
                   <button
                     style={{ zIndex: "100", width: "100%" }}
@@ -419,7 +512,7 @@ let TicketPage = () => {
                   >
                     ثبت
                   </button>
-                </span>
+                </div>
               </div>
             </div>
           </div>
