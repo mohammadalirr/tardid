@@ -156,7 +156,7 @@ let TicketPage = () => {
             user: userRes?.data?.data?.id,
             event: leader.day,
             relation: leader.relation,
-            hasParking: leader.hasParking,
+            hasParking: leader.hasParking === 'Yes' ? true : false,
           });
           console.log("res", res);
           return res?.data?.data?.id;
@@ -172,7 +172,7 @@ let TicketPage = () => {
         event: leader.day,
         isLeader: true,
         relation: leader.relation,
-        hasParking: leader.hasParking,
+        hasParking: leader.hasParking === 'Yes' ? true : false,
         team,
       });
       console.log("response", response);
