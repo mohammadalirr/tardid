@@ -12,6 +12,7 @@ const DaySelector = ({ dayS, setDayS }: any) => {
     () =>
       (data || [])
         ?.filter((e: any) => e.capacity > (e.participants?.lenght || 0))
+        ?.filter((e: any) => e.active)
         .sort(
           (a: any, b: any) =>
             new Date(a.date).getTime() - new Date(b.date).getTime()
