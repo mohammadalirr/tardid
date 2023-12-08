@@ -30,7 +30,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/components/FireParticle.jsx", "src/components/fire.js", "src/components/Ticket.jsx", "src/components/Map-neshan.jsx"  ],
+, "src/components/FireParticle.jsx", "src/components/fire.js", "src/components/Ticket.jsx", "src/components/Map-neshan.jsx", "src/pages/surveyPage.tsx", "src/components/Rating.jsx"  ],
   "exclude": [
     "node_modules"
   ]

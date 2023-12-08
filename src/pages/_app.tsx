@@ -6,6 +6,7 @@ import '../css/glass.css';
 import '../css/gallery.css';
 import '../css/ticket-page.css';
 import '../css/pardakht.css';
+import '../css/survey.css';
 import {
   ColorScheme,
   ColorSchemeProvider,
