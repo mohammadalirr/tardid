@@ -46,11 +46,11 @@ const Glass = () => {
                   }}
                 >
                   خیابان شریعتی، نرسیده به پل سید خندان، بوستان شهید منفرد نیاکی
-                  (اندیشه)
+                  فرهنگسرای اندیشه
                 </p>
                 <a
                   // href="geo:35.738470,51.444944?q=35.738470,51.444944(San Francisco)&z=15"
-                  href="https://maps.app.goo.gl/pyqYe3iSivYP79v97"
+                  href="https://balad.ir/location?latitude=35.734831&longitude=51.445619&zoom=16.500000#15/35.73567/51.44562"
                   target="blank"
                   style={{
                     marginTop: "2em",
