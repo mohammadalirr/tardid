@@ -36,9 +36,10 @@ const DaySelector = ({ dayS, setDayS }: any) => {
         <br />
         <span
           className="footer-0"
-          style={{ fontFamily: "Yekan", lineHeight: ".5empx" }}
+          style={{ fontFamily: "Yekan", color:'red'}}
         >
-          نمایش در این شب‌ها از ساعت 19 تا 21 برگزار خواهد شد.
+          {/* نمایش در این شب‌ها از ساعت 19 تا 21 برگزار خواهد شد. */}
+          این نمایش پایان یافته است.
         </span>
         <br />
         <div className="days">

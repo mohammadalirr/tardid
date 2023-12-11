@@ -35,7 +35,7 @@ let TicketPage = () => {
   const [carA, setCarA] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const [daySelect, setDaySelect] = useState(false);
+  const [daySelect, setDaySelect] = useState(true);
   const [dayS, setDayS] = useState();
 
   const [selected, setSelected] = useState("");
@@ -233,6 +233,14 @@ let TicketPage = () => {
     copy.current.innerText = "✔ کپی شد ";
   };
 
+//test
+const test = () => {
+  setLoading(false)
+  isHidden.current.style.display = "none";
+  falAlert.current.style.display = "block";
+  console.log("test");
+}
+
   return (
     <>
       {/* <ParticlesContainer /> */}
@@ -326,7 +334,7 @@ let TicketPage = () => {
               </Link>
             </div>
 
-            <div className="is-hidden" ref={isHidden}>
+            <div className="is-hidden" ref={isHidden} style={{display:'flex'}}>
               <DaySelector dayS={dayS} setDayS={setDayS} />
 
               {/* <div
@@ -363,7 +371,7 @@ let TicketPage = () => {
                 <label for="floatingSelect">لطفا یک گزینه را انتخاب کنید</label>
               </div> */}
 
-              <div className="second-container" ref={secondContainer}>
+              <div className="second-container" style={{display:'flex'}} ref={secondContainer}>
                 <div className="ticket-counter">
                   <label
                     htmlFor="counter"
@@ -542,11 +550,14 @@ let TicketPage = () => {
                 >
                   <button
                     style={{ zIndex: "100", width: "100%" }}
-                    type="submit"
+                    // type="submit"
                     className="btn btn-danger form-btn"
-                    onClick={handleSubmit}
+                    // onClick={handleSubmit}
                     popovertarget="form-popover"
                     disabled={isDisabled}
+                    //test
+                    onClick={test}
+                    type="button"
                   >
                     ثبت
                   </button>
