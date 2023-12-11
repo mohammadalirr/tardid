@@ -19,14 +19,14 @@ export const dataImagesI = [
         img: '/static/hadis-images/main/divane-1.jpg',
         title: 'divane-1'
     },
-    {
-        img: '/static/hadis-images/main/b-8.jpg',
-        title: 'b-8'
-    },
-    {
-        img: '/static/hadis-images/main/h-1.jpg',
-        title: 'h-1'
-    },
+    // {
+    //     img: '/static/hadis-images/main/b-8.jpg',
+    //     title: 'b-8'
+    // },
+    // {
+    //     img: '/static/hadis-images/main/h-1.jpg',
+    //     title: 'h-1'
+    // },
     {
         img: '/static/hadis-images/main/y-1.jpg',
         title: 'y-1'
@@ -36,10 +36,10 @@ export const dataImagesI = [
 ]
 
 export const dataImagesII = [
-    {
-        img: '/static/hadis-images/main/bazar-3.jpg',
-        title: 'bazar-3'
-    },
+    // {
+    //     img: '/static/hadis-images/main/bazar-3.jpg',
+    //     title: 'bazar-3'
+    // },
 
     {
         img: '/static/hadis-images/main/a-1.jpg',
@@ -64,10 +64,10 @@ export const dataImagesII = [
         title: 'divane-2'
     },
 
-    {
-        img: '/static/hadis-images/main/dota-1.jpg',
-        title: 'dota-1'
-    },
+    // {
+    //     img: '/static/hadis-images/main/dota-1.jpg',
+    //     title: 'dota-1'
+    // },
     {
         img: '/static/hadis-images/main/h-2.jpg',
         title: 'h-2'
@@ -77,10 +77,10 @@ export const dataImagesII = [
         img: '/static/hadis-images/main/hasanein-1.jpg',
         title: 'hasanein-1'
     },
-    {
-        img: '/static/hadis-images/main/yatim-1.jpg',
-        title: 'yatim-1'
-    },
+    // {
+    //     img: '/static/hadis-images/main/yatim-1.jpg',
+    //     title: 'yatim-1'
+    // },
 
 
 ]
